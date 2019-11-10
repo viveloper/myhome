@@ -7,7 +7,7 @@ class Services {
     const postData = { email, password };
     try{
       const user = await axios.post(url, postData);
-      return user;
+      return user.data;
     }
     catch(error){
       throw error;

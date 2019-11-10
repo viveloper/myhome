@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import './SignIn.css';
 import Services from '../services';
 
-const SignIn = () => {
+const SignIn = props => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [checkMeOut, setCheckMeOut] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const { history } = props;
 
   const handleChange = e => {
     if (e.target.type === 'email') {
@@ -24,15 +27,21 @@ const SignIn = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    try{
+    try {
       const user = await Services.signIn(email, password);
       localStorage.setItem('myhome-user', JSON.stringify(user));
-      console.log(user.data);
-      console.log('signin sueccess');
+      console.log('login success');
+      console.log(user);
+      setMessage('');
+      history.push('/');
     }
-    catch(error){
-      console.error(error.response.data);
-      console.log('signin failure');
+    catch (error) {
+      if (error.response.data.message) {
+        setMessage(error.response.data.message);
+      }
+      else {
+        setMessage(`${error.response.status} ${error.response.statusText}`);
+      }
     }
   }
 
@@ -76,6 +85,9 @@ const SignIn = () => {
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
       </form>
+      <div className="signin-message">
+        <p>{message}</p>
+      </div>
     </div>
   );
 }
