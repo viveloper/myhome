@@ -1,24 +1,15 @@
 import React from 'react';
 import './Home.css';
-import withAuth from '../hoc/withAuth';
+import Layout from './Layout';
 
-const Home = props => {
-  const { user, history } = props;
-  const handleClickLogout = () => {
-    localStorage.removeItem('myhome-user');
-    history.push('/signin');
-  }
+const Home = () => {    
   return (
-    <div>
-      <h2>Home</h2>
-      <div>
-        <div>
-          <p>{user.username}</p>
-          <button type="button" className="btn btn-secondary" onClick={handleClickLogout}>Logout</button>
-        </div>
+    <Layout>
+      <div className="home">
+        <h2>Home</h2>
       </div>
-    </div>
+    </Layout>
   );
 }
 
-export default withAuth(Home);
+export default Home;

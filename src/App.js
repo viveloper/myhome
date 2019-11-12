@@ -2,18 +2,28 @@ import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Home from './components/Home';
 import SignIn from './components/SignIn';
+import Posts from './components/Posts';
+import Todo from './components/Todo';
+import NotFound from './components/NotFound';
+import store from './store';
+import { Provider } from 'react-redux';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route
-          path="/signin"
-          render={props => localStorage.getItem('myhome-user') ? <Redirect to="/" /> : <SignIn {...props} />}
-        />
-      </Switch>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route
+            path="/signin"
+            render={props => localStorage.getItem('myhome-user') ? <Redirect to="/" /> : <SignIn {...props} />}
+          />
+          <Route path="/posts/:category" component={Posts} />
+          <Route path="/todo" component={Todo} />
+          <Route component={NotFound} />
+        </Switch>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
