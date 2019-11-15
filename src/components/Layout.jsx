@@ -35,9 +35,18 @@ const Layout = props => {
                                     <Link className="dropdown-item" to="#">Something else here</Link>
                                 </div>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link disabled" to="#" tabIndex="-1" aria-disabled="true">Disabled</Link>
+                            <li className="nav-item dropdown">
+                                <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</Link>
+                                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <Link className="dropdown-item" to="/blog/tech">Tech</Link>
+                                    <Link className="dropdown-item" to="/blog/travel">Travel</Link>
+                                    <div className="dropdown-divider"></div>
+                                    <Link className="dropdown-item" to="#">Something else here</Link>
+                                </div>
                             </li>
+                            {/* <li className="nav-item">
+                                <Link className="nav-link disabled" to="#" tabIndex="-1" aria-disabled="true">Disabled</Link>
+                            </li> */}
                         </ul>
                         <div className="my-2 my-lg-0">
                             <button type="button" className="btn btn-link layout-username">{user.username}</button>
